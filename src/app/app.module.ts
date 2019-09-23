@@ -4,16 +4,29 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RecordsComponent } from './records/records.component';
+import { JokeritResultsComponent } from './jokerit_results/jokeritResults.component';
+import { RouterModule } from '@angular/router';
+import { WelcomeComponent } from './home/welcome.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RecordsComponent
+    RecordsComponent,
+    WelcomeComponent,
+    JokeritResultsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot([
+      { path: 'welcome', component: WelcomeComponent },
+      //{ path: '', redirectTo: 'welcome', pathMatch: 'full' },
+      //{ path: '**', redirectTo: 'welcome', pathMatch: 'full' },
+      { path: 'all', component: RecordsComponent },
+      { path: 'jokerit', component: JokeritResultsComponent },
+      { path: 'jokerit_players', component: RecordsComponent },
+    ]),
   ],
   providers: [],
   bootstrap: [AppComponent]

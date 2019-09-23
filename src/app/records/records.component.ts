@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RecordsService } from './records.service';
+import { RecordsService } from '../records.service';
 
 @Component({
     selector: 'pm-records',
@@ -24,6 +24,7 @@ export class RecordsComponent {
         this.recordsService.getProducts(num).subscribe({
             next: events => {
                 this.events = this.events.concat(events.reverse());
+                this.events.sort((a, b) => a.event.start_at_day.toString().localeCompare(b.event.start_at_day.toString()));
             },
             error: err => this.errorMessage = err
         })
