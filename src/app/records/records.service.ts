@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, forkJoin } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators'
 
 import { Event } from './event';
@@ -12,9 +12,16 @@ export class RecordsService {
     private eventUrl = 'https://khl.api.webcaster.pro/api/khl_mobile/events_v2.json?locale=en'
     constructor(private http: HttpClient) { }
 
-    getProducts(): Observable<Event[]> {
-        return this.http.get<Event[]>(this.eventUrl).pipe(
-            tap(data => console.log('All: ' + JSON.stringify(data))),
+    getProducts(pageNumber: number): Observable<Event[]> {
+        return this.getOnePage(pageNumber);
+    }
+
+    /*getOnePage(pageNumber: number): Event[] {
+        return this.http.get<Event[]>(this.eventUrl + '&page=' + pageNumber);
+    }*/
+    getOnePage(pageNumber: number): Observable<Event[]> {
+        return this.http.get<Event[]>(this.eventUrl + '&page=' + pageNumber).pipe(
+            //tap(data => console.log('All: ' + JSON.stringify(data))),
             catchError(this.handleError)
         );
     }

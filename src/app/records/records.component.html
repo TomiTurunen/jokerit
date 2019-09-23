@@ -11,26 +11,20 @@
 </head>
 
 <body>
-    Jets{{pageTitle}}
+    {{pageTitle}}
     <table>
         <thead>
             <tr>
-                <th>Ottelut</th>
-                <th>Voitot</th>
-                <th>Tasapelit</th>
-                <th>Tappiot</th>
-                <th>Pisteet</th>
-                <th>Maaliero</th>
+                <th>Joukkueet</th>
+                <th>Päivä</th>
+                <th>Tulos</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor='let event of events'>
-                <td>{{event.name}}</td>
                 <td>{{event.event.name}}</td>
                 <td>{{event.event.start_at_day * 1000 + 86400000 | date}}</td>
-                <td>0</td>
-                <td>3</td>
-                <td>5-0</td>
+                <td>{{event.event.score}}</td>
             </tr>
         </tbody>
 
