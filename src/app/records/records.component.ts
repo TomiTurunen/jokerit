@@ -8,6 +8,7 @@ import { RecordsService } from './records.service';
 
 export class RecordsComponent {
     pageTitle: string = 'KHL Tulokset 2019-2020';
+    MAX_PAGE_NUMBER: number = 65;
     //TODO Käännä tulokset ympäri
     errorMessage: string;
     events: any[] = [];
@@ -15,20 +16,16 @@ export class RecordsComponent {
     constructor(private recordsService: RecordsService) { }
 
     ngOnInit(): void {
-        let num: number = 1;
-        this.getOnePage(num);
+        for (let i = this.MAX_PAGE_NUMBER; i > 0; i--) {
+            this.getOnePage(i);
+        }
     }
     getOnePage(num): void {
         this.recordsService.getProducts(num).subscribe({
             next: events => {
-                this.events = this.events.concat(events);
-                console.log(events.length == 0);
-                if (events.length > 0) {
-                    this.getOnePage(num + 1);
-                }
+                this.events = this.events.concat(events.reverse());
             },
             error: err => this.errorMessage = err
-
         })
     }
 
