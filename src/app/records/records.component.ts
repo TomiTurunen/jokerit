@@ -3,13 +3,12 @@ import { RecordsService } from '../records.service';
 
 @Component({
     selector: 'pm-records',
-    templateUrl: './records.component.html'
+    templateUrl: '../records.component.html'
 })
 
 export class RecordsComponent {
     pageTitle: string = 'KHL Tulokset 2019-2020';
     MAX_PAGE_NUMBER: number = 65;
-    //TODO Käännä tulokset ympäri
     errorMessage: string;
     events: any[] = [];
 

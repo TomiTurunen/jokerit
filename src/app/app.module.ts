@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RecordsComponent } from './records/records.component';
 import { JokeritResultsComponent } from './jokerit_results/jokeritResults.component';
+import { JokeritBestPlayersComponent } from './jokerit_best_player/jokeritBestPlayers.component';
 import { RouterModule } from '@angular/router';
 import { WelcomeComponent } from './home/welcome.component';
 
@@ -13,7 +14,8 @@ import { WelcomeComponent } from './home/welcome.component';
     AppComponent,
     RecordsComponent,
     WelcomeComponent,
-    JokeritResultsComponent
+    JokeritResultsComponent,
+    JokeritBestPlayersComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +27,7 @@ import { WelcomeComponent } from './home/welcome.component';
       //{ path: '**', redirectTo: 'welcome', pathMatch: 'full' },
       { path: 'all', component: RecordsComponent },
       { path: 'jokerit', component: JokeritResultsComponent },
-      { path: 'jokerit_players', component: RecordsComponent },
+      { path: 'jokerit_players', component: JokeritBestPlayersComponent },
     ]),
   ],
   providers: [],
