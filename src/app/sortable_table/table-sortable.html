@@ -1,23 +1,38 @@
-<p>You can introduce custom directives for table headers to sort columns</p>
-
 <table class="table table-striped">
   <thead>
-  <tr>
-    <th scope="col">#</th>
-    <th scope="col" sortable="name" (sort)="onSort($event)">Country</th>
-    <th scope="col" sortable="area" (sort)="onSort($event)">Area</th>
-    <th scope="col" sortable="population" (sort)="onSort($event)">Population</th>
-  </tr>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col" sortable="shirt_number" (sort)="onSort($event)">#</th>
+      <th scope="col" sortable="country" (sort)="onSort($event)">Maa</th>
+      <th scope="col" sortable="name" (sort)="onSort($event)">Nimi</th>
+      <th scope="col" sortable="stats-gp" (sort)="onSort($event)" title="Ottelut">O</th>
+      <th scope="col" sortable="stats-g" (sort)="onSort($event)" title="Maalit">M</th>
+      <th scope="col" sortable="stats-fow" (sort)="onSort($event)" title="Aloitukset">Alo</th>
+      <th scope="col" sortable="stats-pts" (sort)="onSort($event)" title="Pisteet">P</th>
+      <th scope="col" sortable="stats-sft_avg" (sort)="onSort($event)" title="Vaihdot/Ottelu">VA/O</th>
+      <th scope="col" sortable="stats-a" (sort)="onSort($event)" title="Syötöt">S</th>
+      <th scope="col" sortable="stats-sds" (sort)="onSort($event)" title="Shootsout deciding shots">LPS</th>
+      <th scope="col" sortable="stats-toi_avg" (sort)="onSort($event)" title="Peliaika/ottelu">PA/O</th>
+      <th scope="col" sortable="stats-pim_avg" (sort)="onSort($event)" title="Rangaistukset/ottelu">R/O</th>
+      <th scope="col" sortable="stats-pim" (sort)="onSort($event)" title="Rangaistukset">R</th>
+      <th scope="col" sortable="stats-top_speed" (sort)="onSort($event)" title="Huippunopeus">N</th>
+      <th scope="col" sortable="stats-time_on_ice" (sort)="onSort($event)" title="Jääaika yhteensä">PA</th>
+      <th scope="col" sortable="stats-distance_travelled" (sort)="onSort($event)"
+        title="Kokonaisluistelumatka kaudella km">
+        M/km</th>
+    </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let country of countries">
-    <th scope="row">{{ country.id }}</th>
-    <td>
-      <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="mr-2" style="width: 20px">
-      {{ country.name }}
-    </td>
-    <td>{{ country.area | number }}</td>
-    <td>{{ country.population | number }}</td>
-  </tr>
+    <tr *ngFor='let score of scores'>
+      <td><img [src]='score.player.image' [title]='score.player.name' [style.width.px]='flagWidth'
+          [style.margin.px]='imageMargin'></td>
+      <td>{{score.player.shirt_number}}</td>
+      <td><img [src]='score.player.flag_image_url' [title]='score.player.name' [style.width.px]='flagWidth'
+          [style.margin.px]='imageMargin'></td>
+      <td>{{score.player.name}}</td>
+      <td *ngFor='let stat of score.player.stats'>
+        {{stat.val | number}}
+      </td>
+    </tr>
   </tbody>
 </table>

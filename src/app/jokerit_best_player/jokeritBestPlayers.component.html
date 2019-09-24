@@ -12,44 +12,6 @@
 
 <body>
     {{pageTitle}}
-    <table class="table table-striped table-responsive-md btn-table">
-        <thead>
-            <tr>
-                <th></th>
-                <th>#</th>
-                <th>Maa</th>
-                <th>Nimi</th>
-                <th title="Ottelut">O</th>
-                <th title="Maalit">M</th>
-                <th title="Aloitukset">Alo</th>
-                <th title="Pisteet">P</th>
-                <th title="Vaihdot/Ottelu">VA/O</th>
-                <th title="Syötöt">S</th>
-                <th title="Peliaika/ottelu">PA/O</th>
-                <th title="Rangaistukset/ottelu">R/O</th>
-                <th title="Rangaistukset">R</th>
-                <th title="Huippunopeus">N</th>
-                <th title="Jääaika yhteensä">PA</th>
-                <th title="Kokonaisluistelumatka kaudella km">M/km</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor='let score of scores'>
-                <td><img [src]='score.player.image' [title]='score.player.name' [style.width.px]='flagWidth'
-                        [style.margin.px]='imageMargin'></td>
-                <td>{{score.player.shirt_number}}</td>
-                <td><img [src]='score.player.flag_image_url' [title]='score.player.name' [style.width.px]='flagWidth'
-                        [style.margin.px]='imageMargin'></td>
-                <td>{{score.player.name | convertBrokenMarks: '&\#x27;' }}</td>
-                <td *ngFor='let stat of score.player.stats'>
-                    <span *ngIf='stat.title != "Shootouts deciding shots"'>
-                        {{stat.val | number}}
-                    </span>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
     <ngbd-table-sortable></ngbd-table-sortable>
 </body>
 
