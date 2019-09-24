@@ -22,10 +22,10 @@ import { ConvertBrokenMarks } from './convert-broken-marks.pipe';
     ConvertBrokenMarks
   ],
   imports: [
+    NgbdTableSortableModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgbdTableSortableModule,
     RouterModule.forRoot([
       { path: 'welcome', component: WelcomeComponent },
       //{ path: '', redirectTo: 'welcome', pathMatch: 'full' },
