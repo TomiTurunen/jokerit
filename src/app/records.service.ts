@@ -17,6 +17,10 @@ export class RecordsService {
     private jokeritUrl = this.baseUrl + 'team_v2?locale=en&id=109';
     constructor(private http: HttpClient) { }
 
+    private jokeritIds: any[] = [908, 1028, 1290, 2701, 3165, 4277, 4349, 5191,
+        5207, 5311, /*8699,*/ 8711, 8727, 8731, 8735, 18925, 18929, 19173, 21865,
+        21869, 21877, 25841, /*25845,*/ 25849, 25853, 25857, 25861, 25865];
+
     getProducts(pageNumber: number): Observable<Event[]> {
         return this.getOnePage(pageNumber);
     }
@@ -26,8 +30,8 @@ export class RecordsService {
             catchError(this.handleError)
         );
     }
-    getScores(jokeritIds: any[]): Observable<Scores[]> {
-        jokeritIds.forEach(function (player) {
+    getScores(): Observable<Scores[]> {
+        this.jokeritIds.forEach(function (player) {
             this.scoreUrl = this.scoreUrl + '&q[id_in][]=' + player
         }.bind(this));
         // jokeritIds.values();

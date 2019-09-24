@@ -25,7 +25,6 @@
                 <th title="Pisteet">P</th>
                 <th title="Vaihdot/Ottelu">VA/O</th>
                 <th title="Syötöt">S</th>
-                <th>pois</th>
                 <th title="Peliaika/ottelu">PA/O</th>
                 <th title="Rangaistukset/ottelu">R/O</th>
                 <th title="Rangaistukset">R</th>
@@ -41,9 +40,11 @@
                 <td>{{score.player.shirt_number}}</td>
                 <td><img [src]='score.player.flag_image_url' [title]='score.player.name' [style.width.px]='flagWidth'
                         [style.margin.px]='imageMargin'></td>
-                <td>{{score.player.name}}</td>
+                <td>{{score.player.name | convertBrokenMarks: '&\#x27;' }}</td>
                 <td *ngFor='let stat of score.player.stats'>
-                    {{stat.val | number}}
+                    <span *ngIf='stat.title != "Shootouts deciding shots"'>
+                        {{stat.val | number}}
+                    </span>
                 </td>
             </tr>
         </tbody>

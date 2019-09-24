@@ -21,20 +21,11 @@ export class JokeritBestPlayersComponent {
     constructor(private recordsService: RecordsService) { }
 
     async ngOnInit(): Promise<void> {
-        let jokeritIds: any[] = this.findPlayers();
-        this.getOnePage(jokeritIds);
+        this.getOnePage();
         console.log(4);
     }
-    findPlayers(): any[] {
-        let jokeritIds: any[] = [908, 1028, 1290, 2701, 3165, 4277, 4349, 5191,
-            5207, 5311, 8699, 8711, 8727, 8731, 8735, 18925, 18929, 19173, 21865,
-            21869, 21877, 25841, 25845, 25849, 25853, 25857, 25861, 25865];
-        //TODO get sync work in get automatically.
-        return jokeritIds;
-
-    }
-    getOnePage(jokeritIds): void {
-        this.recordsService.getScores(jokeritIds).subscribe({
+    getOnePage(): void {
+        this.recordsService.getScores().subscribe({
             next: player => {
                 console.log(player);
                 this.scores = player;

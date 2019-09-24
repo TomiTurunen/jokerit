@@ -6,10 +6,10 @@ import { AppComponent } from './app.component';
 import { RecordsComponent } from './records/records.component';
 import { JokeritResultsComponent } from './jokerit_results/jokeritResults.component';
 import { JokeritBestPlayersComponent } from './jokerit_best_player/jokeritBestPlayers.component';
-import { NgbdTableSortable } from './jokerit_best_player/table_sortable';
 import { NgbdTableSortableModule } from './sortable_table/table-sortable.module';
 import { RouterModule } from '@angular/router';
 import { WelcomeComponent } from './home/welcome.component';
+import { ConvertBrokenMarks } from './convert-broken-marks.pipe';
 
 
 @NgModule({
@@ -19,7 +19,7 @@ import { WelcomeComponent } from './home/welcome.component';
     WelcomeComponent,
     JokeritResultsComponent,
     JokeritBestPlayersComponent,
-    //NgbdTableSortableModule
+    ConvertBrokenMarks
   ],
   imports: [
     BrowserModule,
