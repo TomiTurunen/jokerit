@@ -26,21 +26,10 @@ export class JokeritBestPlayersComponent {
         console.log(4);
     }
     findPlayers(): any[] {
-        console.log(1)
         let jokeritIds: any[] = [908, 1028, 1290, 2701, 3165, 4277, 4349, 5191,
             5207, 5311, 8699, 8711, 8727, 8731, 8735, 18925, 18929, 19173, 21865,
             21869, 21877, 25841, 25845, 25849, 25853, 25857, 25861, 25865];
         //TODO get sync work in get automatically.
-        this.recordsService.getJokerit().subscribe({
-            next: teams => {
-                console.log(2)
-                teams.team.players.forEach(player => {
-                    jokeritIds.push(player.id);
-                });
-            },
-            error: err => this.errorMessage = err
-        })
-        console.log(jokeritIds);
         return jokeritIds;
 
     }
