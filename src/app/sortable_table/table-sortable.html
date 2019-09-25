@@ -5,6 +5,7 @@
       <th scope="col" sortable="shirt_number" (sort)="onSort($event)">#</th>
       <th scope="col" sortable="country" (sort)="onSort($event)">Maa</th>
       <th scope="col" sortable="name" (sort)="onSort($event)">Nimi</th>
+      <th scope="col" sortable="age" (sort)="onSort($event)">Ikä</th>
       <th scope="col" sortable="stats-gp" (sort)="onSort($event)" title="Ottelut">O</th>
       <th scope="col" sortable="stats-g" (sort)="onSort($event)" title="Maalit">M</th>
       <th scope="col" sortable="stats-fow" (sort)="onSort($event)" title="Aloitukset">Alo</th>
@@ -29,6 +30,7 @@
       <td><img [src]='score.player.flag_image_url' [title]='score.player.name' [style.width.px]='flagWidth'
           [style.margin.px]='imageMargin'></td>
       <td>{{score.player.name | convertBrokenMarks: '&\#x27;' }}</td>
+      <td>{{score.player.age}}</td>
       <ng-container *ngFor="let stat of score.player.stats">
         <td *ngIf='stat.title != "Shootouts deciding shots"'>
           {{stat.val | number}}

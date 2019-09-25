@@ -27,7 +27,7 @@ import { ConvertBrokenMarks } from './convert-broken-marks.pipe';
     HttpClientModule,
     RouterModule.forRoot([
       { path: 'welcome', component: WelcomeComponent },
-      { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+      { path: '', redirectTo: 'jokerit_players', pathMatch: 'full' },
       { path: 'all', component: RecordsComponent },
       { path: 'jokerit', component: JokeritResultsComponent },
       { path: 'jokerit_players', component: JokeritBestPlayersComponent },
