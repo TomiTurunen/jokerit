@@ -53,20 +53,23 @@ export class NgbdTableSortable {
   scores: any[] = [];
   scoreStorage: any[] = [];
   //Todo try get id:s automatically
-  jokeritPlayerIds: any[]
-  countries = this.scores;
+  private jokeritIds_1: any[] = [908, 1028, 1290, 2701, 3165, 4277, 4349, 5191,
+    5207, 5311, 8711, 8727, 8727, 8731,];
+  private jokeritIds_2: any[] = [8735, 18925, 18929, 19173, 21865,
+    21869, 21877, 25841, 25849, 25853, 25857, 25861, 25865];
+  private jokeritIds_goaltenders: any[] = [8699, 25845];
   constructor(private recordsService: RecordsService) { }
 
   async ngOnInit(): Promise<void> {
-    this.getOnePage();
-    console.log(4);
+    this.getOnePage(this.jokeritIds_1);
+    this.getOnePage(this.jokeritIds_2);
   }
-  getOnePage(): void {
-    this.recordsService.getScores().subscribe({
+  getOnePage(idsList): void {
+    this.recordsService.getScores(idsList).subscribe({
       next: player => {
         console.log(player);
-        this.scores = player;
-        this.scoreStorage = player;
+        this.scores = player.concat(this.scores);
+        this.scoreStorage = player.concat(this.scoreStorage);
       },
       error: err => this.errorMessage = err
     })
