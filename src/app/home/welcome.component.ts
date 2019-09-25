@@ -4,5 +4,6 @@ import { Component } from '@angular/core';
   templateUrl: './welcome.component.html'
 })
 export class WelcomeComponent {
-  public pageTitle = 'Welcome';
+  public pageTitle = 'Terveloa Jokeri tulokset sivulle. ' +
+    'Tuloksiin pääset navigoimaan välilehdiltä.';
 }

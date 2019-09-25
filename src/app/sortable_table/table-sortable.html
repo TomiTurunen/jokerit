@@ -11,7 +11,6 @@
       <th scope="col" sortable="stats-pts" (sort)="onSort($event)" title="Pisteet">P</th>
       <th scope="col" sortable="stats-sft_avg" (sort)="onSort($event)" title="Vaihdot/Ottelu">VA/O</th>
       <th scope="col" sortable="stats-a" (sort)="onSort($event)" title="Syötöt">S</th>
-      <th scope="col" sortable="stats-sds" (sort)="onSort($event)" title="Shootsout deciding shots">LPS</th>
       <th scope="col" sortable="stats-toi_avg" (sort)="onSort($event)" title="Peliaika/ottelu">PA/O</th>
       <th scope="col" sortable="stats-pim_avg" (sort)="onSort($event)" title="Rangaistukset/ottelu">R/O</th>
       <th scope="col" sortable="stats-pim" (sort)="onSort($event)" title="Rangaistukset">R</th>
@@ -30,9 +29,11 @@
       <td><img [src]='score.player.flag_image_url' [title]='score.player.name' [style.width.px]='flagWidth'
           [style.margin.px]='imageMargin'></td>
       <td>{{score.player.name}}</td>
-      <td *ngFor='let stat of score.player.stats'>
-        {{stat.val | number}}
-      </td>
+      <ng-container *ngFor="let stat of score.player.stats">
+        <td *ngIf='stat.title != "Shootouts deciding shots"'>
+          {{stat.val | number}}
+        </td>
+      </ng-container>
     </tr>
   </tbody>
 </table>
