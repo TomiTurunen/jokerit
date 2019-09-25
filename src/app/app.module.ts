@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RecordsComponent } from './records/records.component';
+import { RecordsComponent } from './khl_records/records.component';
 import { JokeritResultsComponent } from './jokerit_results/jokeritResults.component';
 import { JokeritBestPlayersComponent } from './jokerit_best_player/jokeritBestPlayers.component';
 import { NgbdTableSortableModule } from './sortable_table/table-sortable.module';

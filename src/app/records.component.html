@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Jets</title>
+    <title>Jokerit</title>
     <base href="/">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,7 +28,24 @@
                 <td><span class='result'><b>{{event.event.score}}</b></span></td>
             </tr>
         </tbody>
-
+    </table>
+    {{comingTitle}}
+    <table class="table table-striped table-responsive-md btn-table">
+        <thead>
+            <tr>
+                <th>Joukkueet</th>
+                <th>Päivä</th>
+                <th>Tulos</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor='let event of comingEvents'>
+                <td>{{event.event.name}}</td>
+                <td>{{event.event.start_at_day * 1000 + 86400000 |  date: 'dd.MM.yyyy'}}
+                </td>
+                <td><span class='result'><b>{{event.event.score}}</b></span></td>
+            </tr>
+        </tbody>
     </table>
 </body>
 
