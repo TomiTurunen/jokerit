@@ -28,7 +28,7 @@
       <td>{{score.player.shirt_number}}</td>
       <td><img [src]='score.player.flag_image_url' [title]='score.player.name' [style.width.px]='flagWidth'
           [style.margin.px]='imageMargin'></td>
-      <td>{{score.player.name}}</td>
+      <td>{{score.player.name | convertBrokenMarks: '&\#x27;' }}</td>
       <ng-container *ngFor="let stat of score.player.stats">
         <td *ngIf='stat.title != "Shootouts deciding shots"'>
           {{stat.val | number}}

@@ -18,8 +18,7 @@ import { ConvertBrokenMarks } from './convert-broken-marks.pipe';
     RecordsComponent,
     WelcomeComponent,
     JokeritResultsComponent,
-    JokeritBestPlayersComponent,
-    ConvertBrokenMarks
+    JokeritBestPlayersComponent
   ],
   imports: [
     NgbdTableSortableModule,
