@@ -1,34 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Navbar } from './navbar/navbar'
 import { RecordsService } from './records.service';
 
 @Component({
   selector: 'app-root',
   styleUrls: ['./app.component.sass'],
-  template: `
-  <nav class='navbar navbar-axpand navbar-light bg-light'>
-  <ul class="nav nav-tabs" id="myTab" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link" [routerLink]="['/welcome']" id="home-tab" data-toggle="tab" role="tab" aria-controls="home" aria-selected="true">Etusivu</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" [routerLink] = "['/all']" id="profile-tab" data-toggle="tab" role="tab" aria-controls="profile" aria-selected="false">KHL-tulokset</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" [routerLink] = "['/jokerit']" id="contact-tab" data-toggle="tab" role="tab" aria-controls="contact" aria-selected="false">Jokeri-tulokset</a>
-  </li>
-  <li class="nav-item">
-  <a class="nav-link" [routerLink] = "['/jokerit_players']" id="contact-tab" data-toggle="tab" role="tab" aria-controls="contact" aria-selected="false">Jokeri-pelaajat</a>
-</li>
-</ul>
-<div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
-  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
-</div>
-  </nav>
-  <div class='container'>
-    <router-outlet></router-outlet>
-  </div>
-  `,
+  templateUrl: './navbar/navbar.html',
 })
-export class AppComponent { }
+export class AppComponent implements OnInit {
+  public qwerty: string = '242';
+  containerActive = false;
+  //TODO get activates work
+  ngOnInit(): void {
+    console.log("123", window.location.href)
+  }
+  clicked(event) {
+    this.containerActive = !this.containerActive;
+    console.log("clicked");
+  }
+  public condition = false; // true if you want the class at first
+
+  handleClick(event) {
+    console.log(event.target);
+    event.target.condition = true;
+  }
+}
+

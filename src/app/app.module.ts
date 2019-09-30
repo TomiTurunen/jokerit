@@ -9,7 +9,8 @@ import { JokeritBestPlayersComponent } from './jokerit_best_player/jokeritBestPl
 import { NgbdTableSortableModule } from './sortable_table/table-sortable.module';
 import { RouterModule } from '@angular/router';
 import { WelcomeComponent } from './home/welcome.component';
-import { ConvertBrokenMarks } from './convert-broken-marks.pipe';
+import { StoreModule } from '@ngrx/store';
+import { reducer } from './state/tab.reducer';
 
 
 @NgModule({
@@ -25,6 +26,8 @@ import { ConvertBrokenMarks } from './convert-broken-marks.pipe';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    StoreModule.forRoot({}),
+    StoreModule.forFeature('products', reducer),
     RouterModule.forRoot([
       { path: 'welcome', component: WelcomeComponent },
       { path: '', redirectTo: 'jokerit_players', pathMatch: 'full' },

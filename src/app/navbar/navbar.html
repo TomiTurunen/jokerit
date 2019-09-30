@@ -1,0 +1,31 @@
+<nav class='navbar navbar-axpand navbar-light bg-light'>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link" [ngClass]="{active: condition}" [routerLink]="['/welcome']" id="home-tab"
+                data-toggle="tab" role="tab" aria-controls="home" aria-selected="true">Etusivu</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [ngClass]="{active: condition}" (click)="handleClick($event)" [routerLink]="['/all']"
+                id="profile-tab" data-toggle="tab" role="tab" aria-controls="profile"
+                aria-selected="false">KHL-tulokset</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [ngClass]="{'is-active': condition}" (click)="handleClick($event)"
+                [routerLink]="['/jokerit']" id="contact-tab" data-toggle="tab" role="tab" aria-controls="contact"
+                aria-selected="false">Jokeri-tulokset</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [ngClass]="{active: condition}" [routerLink]="['/jokerit_players']" id="contact-tab"
+                data-toggle="tab" role="tab" aria-controls="contact" aria-selected="false">Jokeri-pelaajat</a>
+        </li>
+    </ul>
+    <div>
+        <label>
+            <input class="form-check-input" type="checkbox">
+            Display Product Code2
+        </label>
+    </div>
+</nav>
+<div class='container'>
+    <router-outlet></router-outlet>
+</div>
