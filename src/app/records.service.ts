@@ -38,8 +38,8 @@ export class RecordsService {
             catchError(this.handleError)
         );
     }
-    getJokerit(): Observable<Teams[]> {
-        return this.http.get<Teams[]>(this.jokeritUrl).pipe(
+    getJokerit(): Observable<any> {
+        return this.http.get<any>(this.jokeritUrl).pipe(
             catchError(this.handleError)
         );
     }
