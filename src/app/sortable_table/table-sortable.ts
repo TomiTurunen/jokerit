@@ -8,9 +8,6 @@ interface Country {
   area: number;
   population: number;
 }
-
-const COUNTRIES: Country[] = [];
-
 export type SortDirection = 'asc' | 'desc' | '';
 const rotate: { [key: string]: SortDirection } = { 'asc': 'desc', 'desc': '', '': 'asc' };
 export const compare = (v1, v2) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
@@ -53,16 +50,30 @@ export class NgbdTableSortable {
   scores: any[] = [];
   scoreStorage: any[] = [];
   //Todo try get id:s automatically
+  private jokeritIds: any[] = []
   private jokeritIds_1: any[] = [908, 1028, 1290, 2701, 3165, 4277, 4349, 5191,
-    5207, 5311, 8711, 8727, 8727, 8731,];
-  private jokeritIds_2: any[] = [8735, 18925, 18929, 19173, 21865,
-    21869, 21877, 25841, 25849, 25853, 25857, 25861, 25865];
+    5207, 5311, 8711, 8727, 8731, 8735];
+  private jokeritIds_2: any[] = [18925, 18929, 19173, 21865,
+    21869, 21877, 25841, 25849, 25853, 25857, 25861, 25865, 28133];
   private jokeritIds_goaltenders: any[] = [8699, 25845];
   constructor(private recordsService: RecordsService) { }
 
   async ngOnInit(): Promise<void> {
+    this.getJokeritPlayers();
     this.getOnePage(this.jokeritIds_1);
     this.getOnePage(this.jokeritIds_2);
+  }
+
+  getJokeritPlayers(): void {
+    this.recordsService.getJokerit().subscribe({
+      next: jokerit => {
+        jokerit.team.players.forEach(player => {
+          this.jokeritIds.push(player.id);
+        })
+      },
+      error: err => this.errorMessage = err
+    })
+    console.log(this.jokeritIds);
   }
   getOnePage(idsList): void {
     this.recordsService.getScores(idsList).subscribe({
