@@ -11,7 +11,6 @@ export class JokeritResultsComponent {
     comingTitle: string = 'Tulossa olevat pelit:'
     MAX_PAGE_NUMBER: number = 65;
     JOKERIT_ID: number = 109;
-    //TODO Käännä tulokset ympäri
     errorMessage: string;
     events: any[] = [];
     comingEvents: any[] = [];

@@ -1,20 +1,15 @@
 import { Component, Directive, EventEmitter, Input, Output, QueryList, ViewChildren } from '@angular/core';
 import { RecordsService } from '../records.service';
 
-interface Country {
-  id: number;
-  name: string;
-  flag: string;
-  area: number;
-  population: number;
-}
 export type SortDirection = 'asc' | 'desc' | '';
 const rotate: { [key: string]: SortDirection } = { 'asc': 'desc', 'desc': '', '': 'asc' };
 export const compare = (v1, v2) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
 
+
 export interface SortEvent {
   column: string;
   direction: SortDirection;
+  isGoaltender: Boolean;
 }
 
 @Directive({
@@ -29,11 +24,12 @@ export class NgbdSortableHeader {
 
   @Input() sortable: string;
   @Input() direction: SortDirection = '';
+  @Input() isGoaltender: boolean;
   @Output() sort = new EventEmitter<SortEvent>();
 
   rotate() {
     this.direction = rotate[this.direction];
-    this.sort.emit({ column: this.sortable, direction: this.direction });
+    this.sort.emit({ column: this.sortable, direction: this.direction, isGoaltender: this.isGoaltender });
   }
 }
 
@@ -49,6 +45,10 @@ export class NgbdTableSortable {
   imageMargin = 2;
   scores: any[] = [];
   scoreStorage: any[] = [];
+  gt_scores: any[] = [];
+  gt_scoreStorage: any[] = [];
+  fieldPlayers: string = 'Kenttäpelaajat';
+  goaltenders: string = 'Maalivahdit';
   //Todo try get id:s automatically
   private jokeritIds: any[] = []
   private jokeritIds_1: any[] = [908, 1028, 1290, 2701, 3165, 4277, 4349, 5191,
@@ -60,8 +60,9 @@ export class NgbdTableSortable {
 
   async ngOnInit(): Promise<void> {
     this.getJokeritPlayers();
-    this.getOnePage(this.jokeritIds_1);
-    this.getOnePage(this.jokeritIds_2);
+    this.getOnePage(this.jokeritIds_1, false);
+    this.getOnePage(this.jokeritIds_2, false);
+    this.getOnePage(this.jokeritIds_goaltenders, true);
   }
 
   getJokeritPlayers(): void {
@@ -75,12 +76,12 @@ export class NgbdTableSortable {
     })
     console.log(this.jokeritIds);
   }
-  getOnePage(idsList): void {
+  getOnePage(idsList, isGoaltender): void {
     this.recordsService.getScores(idsList).subscribe({
       next: player => {
         console.log(player);
-        this.scores = player.concat(this.scores);
-        this.scoreStorage = player.concat(this.scoreStorage);
+        isGoaltender ? this.gt_scores = player.concat(this.gt_scores) : this.scores = player.concat(this.scores);
+        isGoaltender ? this.gt_scoreStorage = player.concat(this.gt_scoreStorage) : this.scoreStorage = player.concat(this.scoreStorage);
       },
       error: err => this.errorMessage = err
     })
@@ -88,9 +89,10 @@ export class NgbdTableSortable {
 
   @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
 
-  onSort({ column, direction }: SortEvent) {
+  onSort({ column, direction, isGoaltender }: SortEvent) {
     console.log(column, direction)
-
+    let scores = isGoaltender ? this.gt_scores : this.scores;
+    let scoreStorage = isGoaltender ? this.gt_scoreStorage : this.scoreStorage;
     // resetting other headers
     this.headers.forEach(header => {
       if (header.sortable !== column) {
@@ -98,13 +100,13 @@ export class NgbdTableSortable {
       }
     });
 
-    // sorting countries
+    // sorting players
     if (direction === '') {
-      this.scores = this.scoreStorage;
+      isGoaltender ? this.gt_scores = this.gt_scoreStorage : this.scores = this.scoreStorage;
     } else if (column.includes('stats')) {
       console.log(column.split("_")[1])
       let sortingString: string = column.split("-")[1];
-      this.scores = [...this.scoreStorage].sort((a, b) => {
+      scores = [...scoreStorage].sort((a, b) => {
         const aValue = (a.player.stats.find(s => s.id === sortingString)).val;
         const bValue = (b.player.stats.find(s => s.id === sortingString)).val;
         const res = compare(aValue, bValue);
@@ -112,12 +114,12 @@ export class NgbdTableSortable {
       });
     }
     else {
-      this.scores = [...this.scoreStorage].sort((a, b) => {
+      scores = [...scoreStorage].sort((a, b) => {
         const res = compare(a.player[column], b.player[column]);
         return direction === 'asc' ? res : -res;
       });
-      console.log(this.scores)
     }
+    isGoaltender ? this.gt_scores = scores : this.scores = scores;
   }
 
 }

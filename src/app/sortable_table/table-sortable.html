@@ -1,3 +1,5 @@
+<br />
+{{fieldPlayers}}
 <table class="table table-striped">
   <thead>
     <tr>
@@ -14,7 +16,7 @@
       <th scope="col" sortable="stats-a" (sort)="onSort($event)" title="Syötöt">S</th>
       <th scope="col" sortable="stats-toi_avg" (sort)="onSort($event)" title="Peliaika/ottelu">PA/O</th>
       <th scope="col" sortable="stats-pim_avg" (sort)="onSort($event)" title="Rangaistukset/ottelu">R/O</th>
-      <th scope="col" sortable="stats-pim" (sort)="onSort($event)" title="Rangaistukset">R</th>
+      <th scope="col" sortable="stats-pim" (sort)="onSort($event)" title="Rangaistusminuutit">R</th>
       <th scope="col" sortable="stats-top_speed" (sort)="onSort($event)" title="Huippunopeus">N</th>
       <th scope="col" sortable="stats-time_on_ice" (sort)="onSort($event)" title="Jääaika yhteensä">PA</th>
       <th scope="col" sortable="stats-distance_travelled" (sort)="onSort($event)"
@@ -33,6 +35,49 @@
       <td>{{score.player.age}}</td>
       <ng-container *ngFor="let stat of score.player.stats">
         <td *ngIf='stat.title != "Shootouts deciding shots"'>
+          {{stat.val | number}}
+        </td>
+      </ng-container>
+    </tr>
+  </tbody>
+</table>
+
+{{goaltenders}}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col" isGoaltender=true sortable="shirt_number" (sort)="onSort($event)">#</th>
+      <th scope="col" isGoaltender=true sortable="country" (sort)="onSort($event)">Maa</th>
+      <th scope="col" isGoaltender=true sortable="name" (sort)="onSort($event)">Nimi</th>
+      <th scope="col" isGoaltender=true sortable="age" (sort)="onSort($event)">Ikä</th>
+      <th scope="col" isGoaltender=true sortable="stats-gp" (sort)="onSort($event)" title="Ottelut">O</th>
+      <th scope="col" isGoaltender=true sortable="stats-w" (sort)="onSort($event)" title="Voitot">V</th>
+      <th scope="col" isGoaltender=true sortable="stats-l" (sort)="onSort($event)" title="Tappiot">T</th>
+      <th scope="col" isGoaltender=true sortable="stats-ga" (sort)="onSort($event)" title="Päästetyt maalit">PM</th>
+      <th scope="col" isGoaltender=true sortable="stats-sv" (sort)="onSort($event)" title="Torjunnat">TO</th>
+      <th scope="col" isGoaltender=true sortable="stats-sv_pct" (sort)="onSort($event)" title="Torjunta %">T%</th>
+      <th scope="col" isGoaltender=true sortable="stats-gaa" (sort)="onSort($event)" title="Päästetyt maalit/ottelu">
+        PM/O</th>
+      <th scope="col" isGoaltender=true sortable="stats-pim" (sort)="onSort($event)" title="Rangaistusminuutit">R</th>
+      <th scope="col" isGoaltender=true sortable="stats-toi" (sort)="onSort($event)" title="Jääaika yhteensä">PA</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor='let score of gt_scores'>
+      <td><img [src]='score.player.image' [title]='score.player.name' [style.width.px]='flagWidth'
+          [style.margin.px]='imageMargin'></td>
+      <td>{{score.player.shirt_number}}</td>
+      <td><img [src]='score.player.flag_image_url' [title]='score.player.name' [style.width.px]='flagWidth'
+          [style.margin.px]='imageMargin'></td>
+      <td>{{score.player.name | convertBrokenMarks: '&\#x27;' }}</td>
+      <td>{{score.player.age}}</td>
+      <ng-container *ngFor="let stat of score.player.stats">
+        <td *ngIf='stat.title != "Shootouts played" 
+        && stat.title != "Shutouts" 
+        && stat.title != "Top speed, km/h" 
+        && stat.title != "Time on ice, h" 
+        && stat.title != "Total distance, km"'>
           {{stat.val | number}}
         </td>
       </ng-container>
