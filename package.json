@@ -60,5 +60,8 @@
   "engines": {
     "node": "10.16.3",
     "npm": "6.9.0"
+  },
+  "resolutions": {
+    "@babel/preset-env": "7.5.5"
   }
 }
